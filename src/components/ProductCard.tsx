@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe }) => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      exit={{ x: (info: any) => (info?.offset?.x > 0 ? 300 : -300), opacity: 0 }}
+      exit={{ x: 300, opacity: 0, transition: { duration: 0.3 } }}
     >
       <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4">
         <img
