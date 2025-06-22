@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
         JA
       </motion.div>
       
-      {/* Product Image */}
+      {/* Product Image - KORRIGIERT */}
       <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4">
         <img 
           src={product.image} 
