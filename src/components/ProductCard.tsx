@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion, PanInfo, useMotionValue, useTransform } from 'framer-motion';
 import { Product } from '@/types/Product';
+import { Backpack, Battery, Coffee } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -33,6 +34,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
   if (isAnimating) {
     return null;
   }
+
+  const getIcon = () => {
+    switch (product.image) {
+      case 'backpack':
+        return <Backpack size={120} className="text-transa-turquoise" />;
+      case 'battery':
+        return <Battery size={120} className="text-transa-turquoise" />;
+      case 'cup':
+        return <Coffee size={120} className="text-transa-turquoise" />;
+      default:
+        return <Backpack size={120} className="text-transa-turquoise" />;
+    }
+  };
 
   return (
     <motion.div
@@ -66,14 +80,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
         JA
       </motion.div>
       
-      {/* Product Image */}
-      <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4">
-        <img 
-          src={product.image} 
-          alt={product.name}
-          className="w-full h-full object-contain"
-          draggable={false}
-        />
+      {/* Product Icon */}
+      <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4 flex items-center justify-center">
+        {getIcon()}
       </div>
       
       {/* Product Info */}
