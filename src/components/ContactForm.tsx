@@ -65,14 +65,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ bundle, onBack }) => {
       `Newsletter: ${form.newsletter ? 'Ja, ich möchte den Newsletter erhalten' : 'Nein, ich möchte keinen Newsletter'}`,
       '',
       '--- Ausgewählte Produkte ---',
-      bundle.backpack ? `Rucksack: ${bundle.backpack.name}` : '',
-      bundle.powerbank ? `Powerbank: ${bundle.powerbank.name}` : '',
-      bundle.bottle ? `Trinkflasche: ${bundle.bottle.name}` : '',
+      bundle.backpack?.name ? `Rucksack: ${bundle.backpack.name}` : '',
+      bundle.powerbank?.name ? `Powerbank: ${bundle.powerbank.name}` : '',
+      bundle.bottle?.name ? `Trinkflasche: ${bundle.bottle.name}` : '',
       '',
       'Bitte informieren Sie mich über Verfügbarkeit und Preise.',
       '',
       'Freundliche Grüsse'
-    ].filter(line => line !== undefined);
+    ].filter(line => line !== '');
     
     const body = encodeURIComponent(bodyParts.join('\n'));
     const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
