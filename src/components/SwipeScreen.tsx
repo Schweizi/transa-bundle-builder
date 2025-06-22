@@ -21,13 +21,22 @@ const categoryTitles = {
 };
 
 const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSelected }) => {
-  const products = getProductsByCategory(category); // Fixed: removed useState to update on category change
+  // All hooks must be called at the top level before any conditional logic
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  // Reset state when category changes
+  useEffect(() => {
+    setCurrentIndex(0);
+    setIsAnimating(false);
+    setSelectedProduct(null);
+  }, [category]);
+
+  // Get products after hooks are defined
+  const products = getProductsByCategory(category);
   const currentProduct = products[currentIndex];
-  const allProductsViewed = currentIndex >= products.length; // Check if all products were viewed
+  const allProductsViewed = currentIndex >= products.length;
 
   const handleSwipe = (direction: 'left' | 'right') => {
     if (isAnimating || allProductsViewed) return;
@@ -46,8 +55,8 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
         if (currentIndex < products.length - 1) {
           setCurrentIndex(currentIndex + 1);
         } else {
-          // All products viewed, show reset option
-          setCurrentIndex(products.length); // Set to beyond array to trigger allProductsViewed
+          // All products viewed, set index beyond array length
+          setCurrentIndex(products.length);
         }
         setIsAnimating(false);
       }, 300);
@@ -62,12 +71,6 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
     setCurrentIndex(0);
     setIsAnimating(false);
   };
-
-  useEffect(() => {
-    setCurrentIndex(0);
-    setIsAnimating(false);
-    setSelectedProduct(null);
-  }, [category]);
 
   return (
     <div className="min-h-screen bg-transa-bg flex flex-col items-center justify-center px-6">
