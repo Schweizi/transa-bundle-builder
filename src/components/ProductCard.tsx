@@ -13,6 +13,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 0, 200], [-20, 0, 20]);
   const opacity = useTransform(x, [-200, -50, 0, 50, 200], [0.5, 1, 1, 1, 0.5]);
+  
+  // Call all useTransform hooks consistently at the top level
+  const neinOpacity = useTransform(x, [-100, -50], [1, 0]);
+  const neinScale = useTransform(x, [-100, -50], [1, 0.8]);
+  const jaOpacity = useTransform(x, [50, 100], [0, 1]);
+  const jaScale = useTransform(x, [50, 100], [0.8, 1]);
 
   const handleDragEnd = (event: any, info: PanInfo) => {
     const threshold = 100;
@@ -43,8 +49,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
       <motion.div 
         className="absolute top-8 left-8 px-4 py-2 rounded-lg font-bold bg-transa-red text-white z-10"
         style={{ 
-          opacity: useTransform(x, [-100, -50], [1, 0]),
-          scale: useTransform(x, [-100, -50], [1, 0.8])
+          opacity: neinOpacity,
+          scale: neinScale
         }}
       >
         NEIN
@@ -53,8 +59,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
       <motion.div 
         className="absolute top-8 right-8 px-4 py-2 rounded-lg font-bold bg-transa-turquoise text-white z-10"
         style={{ 
-          opacity: useTransform(x, [50, 100], [0, 1]),
-          scale: useTransform(x, [50, 100], [0.8, 1])
+          opacity: jaOpacity,
+          scale: jaScale
         }}
       >
         JA
