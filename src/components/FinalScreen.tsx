@@ -131,11 +131,11 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ votes, onThankYou, onRestart 
           </div>
           
           <h1 className="text-4xl font-bold text-transa-text mb-4">
-            Deine Abstimmung ist 
-            <span className="text-transa-turquoise block">komplett!</span>
+            Danke für deine 
+            <span className="text-transa-turquoise block">Teilnahme!</span>
           </h1>
           <p className="text-lg text-transa-text/70 mb-6">
-            Danke für deine Bewertungen! Lass uns deine Kontaktdaten wissen.
+            Hier ist eine Übersicht deiner Bewertungen. Wenn du Interesse an einem Bundle-Angebot basierend auf deinen Favoriten hast, hinterlasse einfach deine Kontaktdaten.
           </p>
         </motion.div>
 

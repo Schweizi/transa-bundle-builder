@@ -6,20 +6,25 @@ import SwipeScreen from '@/components/SwipeScreen';
 import FinalScreen from '@/components/FinalScreen';
 import ThankYouScreen from '@/components/ThankYouScreen';
 
-type AppState = 'start' | 'backpack' | 'powerbank' | 'bottle' | 'final' | 'thankyou';
+type AppState = 'start' | 'voting' | 'final' | 'thankyou';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('start');
   const [votes, setVotes] = useState<Vote[]>([]);
-  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [progress, setProgress] = useState({
+    categoryIndex: 0,
+    productIndex: 0
+  });
+
+  const categories: Array<'backpack' | 'powerbank' | 'bottle'> = ['backpack', 'powerbank', 'bottle'];
 
   const handleStart = () => {
-    setCurrentState('backpack');
+    setCurrentState('voting');
     setVotes([]);
-    setCurrentCategoryIndex(0);
+    setProgress({ categoryIndex: 0, productIndex: 0 });
   };
 
-  const handleVoteSubmitted = (product: Product, vote: 'yes' | 'no') => {
+  const handleVote = (product: Product, vote: 'yes' | 'no') => {
     const newVote: Vote = {
       productId: product.id,
       productName: product.name,
@@ -30,23 +35,25 @@ const Index = () => {
     const newVotes = [...votes, newVote];
     setVotes(newVotes);
 
-    // Prüfe ob alle 3 Produkte einer Kategorie bewertet wurden
-    const votesInCurrentCategory = newVotes.filter(v => v.category === product.category);
-    
-    if (votesInCurrentCategory.length === 3) {
-      // Wechsle zur nächsten Kategorie oder zum finalen Screen
-      if (currentState === 'backpack') {
-        setCurrentState('powerbank');
-        setCurrentCategoryIndex(0);
-      } else if (currentState === 'powerbank') {
-        setCurrentState('bottle');
-        setCurrentCategoryIndex(0);
-      } else if (currentState === 'bottle') {
-        setCurrentState('final');
-      }
+    // Calculate next position
+    let nextProductIndex = progress.productIndex + 1;
+    let nextCategoryIndex = progress.categoryIndex;
+
+    if (nextProductIndex >= 3) {
+      // Move to next category
+      nextProductIndex = 0;
+      nextCategoryIndex += 1;
+    }
+
+    if (nextCategoryIndex >= 3) {
+      // All categories done, go to final screen
+      setCurrentState('final');
     } else {
-      // Gehe zum nächsten Produkt in derselben Kategorie
-      setCurrentCategoryIndex(currentCategoryIndex + 1);
+      // Update progress
+      setProgress({
+        categoryIndex: nextCategoryIndex,
+        productIndex: nextProductIndex
+      });
     }
   };
 
@@ -57,21 +64,14 @@ const Index = () => {
   const handleRestart = () => {
     setCurrentState('start');
     setVotes([]);
-    setCurrentCategoryIndex(0);
+    setProgress({ categoryIndex: 0, productIndex: 0 });
   };
 
-  const getStepNumber = (state: AppState): number => {
-    switch (state) {
-      case 'backpack': return 1;
-      case 'powerbank': return 2;
-      case 'bottle': return 3;
-      default: return 1;
-    }
-  };
+  const getStepNumber = (): number => progress.categoryIndex + 1;
 
   console.log('Current state:', currentState);
   console.log('Current votes:', votes);
-  console.log('Current category index:', currentCategoryIndex);
+  console.log('Progress:', progress);
 
   return (
     <div className="min-h-screen bg-transa-bg">
@@ -79,12 +79,12 @@ const Index = () => {
         <StartScreen onStart={handleStart} />
       )}
       
-      {(currentState === 'backpack' || currentState === 'powerbank' || currentState === 'bottle') && (
+      {currentState === 'voting' && (
         <SwipeScreen 
-          category={currentState}
-          step={getStepNumber(currentState)}
-          productIndex={currentCategoryIndex}
-          onVoteSubmitted={handleVoteSubmitted}
+          category={categories[progress.categoryIndex]}
+          step={getStepNumber()}
+          productIndex={progress.productIndex}
+          onVoteSubmitted={handleVote}
         />
       )}
       
