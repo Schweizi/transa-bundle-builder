@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SelectedBundle } from '@/types/Product';
 import { Button } from '@/components/ui/button';
-import { Backpack, Battery, Coffee } from 'lucide-react';
 
 interface ResultScreenProps {
   bundle: SelectedBundle;
@@ -17,19 +16,6 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ bundle, onShowInterest, onR
     { label: 'Powerbank', product: bundle.powerbank },
     { label: 'Trinkflasche', product: bundle.bottle }
   ];
-
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'backpack':
-        return <Backpack size={80} className="text-transa-turquoise" />;
-      case 'battery':
-        return <Battery size={80} className="text-transa-turquoise" />;
-      case 'cup':
-        return <Coffee size={80} className="text-transa-turquoise" />;
-      default:
-        return <Backpack size={80} className="text-transa-turquoise" />;
-    }
-  };
 
   return (
     <motion.div 
@@ -71,8 +57,12 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ bundle, onShowInterest, onR
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
               >
-                <div className="aspect-square overflow-hidden p-4 flex items-center justify-center">
-                  {getIcon(product.image)}
+                <div className="aspect-square overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="p-4">
                   <div className="text-xs font-semibold text-transa-turquoise uppercase tracking-wide mb-1">
