@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Product, SelectedBundle } from '@/types/Product';
+import { Product, Vote } from '@/types/Product';
 import StartScreen from '@/components/StartScreen';
 import SwipeScreen from '@/components/SwipeScreen';
 import FinalScreen from '@/components/FinalScreen';
@@ -10,32 +10,43 @@ type AppState = 'start' | 'backpack' | 'powerbank' | 'bottle' | 'final' | 'thank
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('start');
-  const [selectedBundle, setSelectedBundle] = useState<SelectedBundle>({});
+  const [votes, setVotes] = useState<Vote[]>([]);
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
 
   const handleStart = () => {
     setCurrentState('backpack');
-    setSelectedBundle({});
+    setVotes([]);
+    setCurrentCategoryIndex(0);
   };
 
-  const handleProductSelected = (product: Product) => {
-    const newBundle = { ...selectedBundle };
+  const handleVoteSubmitted = (product: Product, vote: 'yes' | 'no') => {
+    const newVote: Vote = {
+      productId: product.id,
+      productName: product.name,
+      category: product.category,
+      vote: vote
+    };
     
-    switch (product.category) {
-      case 'backpack':
-        newBundle.backpack = product;
-        setSelectedBundle(newBundle);
+    const newVotes = [...votes, newVote];
+    setVotes(newVotes);
+
+    // Prüfe ob alle 3 Produkte einer Kategorie bewertet wurden
+    const votesInCurrentCategory = newVotes.filter(v => v.category === product.category);
+    
+    if (votesInCurrentCategory.length === 3) {
+      // Wechsle zur nächsten Kategorie oder zum finalen Screen
+      if (currentState === 'backpack') {
         setCurrentState('powerbank');
-        break;
-      case 'powerbank':
-        newBundle.powerbank = product;
-        setSelectedBundle(newBundle);
+        setCurrentCategoryIndex(0);
+      } else if (currentState === 'powerbank') {
         setCurrentState('bottle');
-        break;
-      case 'bottle':
-        newBundle.bottle = product;
-        setSelectedBundle(newBundle);
+        setCurrentCategoryIndex(0);
+      } else if (currentState === 'bottle') {
         setCurrentState('final');
-        break;
+      }
+    } else {
+      // Gehe zum nächsten Produkt in derselben Kategorie
+      setCurrentCategoryIndex(currentCategoryIndex + 1);
     }
   };
 
@@ -45,7 +56,8 @@ const Index = () => {
 
   const handleRestart = () => {
     setCurrentState('start');
-    setSelectedBundle({});
+    setVotes([]);
+    setCurrentCategoryIndex(0);
   };
 
   const getStepNumber = (state: AppState): number => {
@@ -58,7 +70,8 @@ const Index = () => {
   };
 
   console.log('Current state:', currentState);
-  console.log('Selected bundle:', selectedBundle);
+  console.log('Current votes:', votes);
+  console.log('Current category index:', currentCategoryIndex);
 
   return (
     <div className="min-h-screen bg-transa-bg">
@@ -70,13 +83,14 @@ const Index = () => {
         <SwipeScreen 
           category={currentState}
           step={getStepNumber(currentState)}
-          onProductSelected={handleProductSelected}
+          productIndex={currentCategoryIndex}
+          onVoteSubmitted={handleVoteSubmitted}
         />
       )}
       
       {currentState === 'final' && (
         <FinalScreen 
-          bundle={selectedBundle}
+          votes={votes}
           onThankYou={handleThankYou}
           onRestart={handleRestart}
         />

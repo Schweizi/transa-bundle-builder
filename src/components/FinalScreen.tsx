@@ -1,20 +1,20 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SelectedBundle, ContactForm as ContactFormType } from '@/types/Product';
+import { Vote, ContactForm as ContactFormType } from '@/types/Product';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Star } from 'lucide-react';
+import { Star, Check, X } from 'lucide-react';
 
 interface FinalScreenProps {
-  bundle: SelectedBundle;
+  votes: Vote[];
   onThankYou: () => void;
   onRestart: () => void;
 }
 
-const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart }) => {
+const FinalScreen: React.FC<FinalScreenProps> = ({ votes, onThankYou, onRestart }) => {
   const [form, setForm] = useState<ContactFormType>({
     firstName: '',
     lastName: '',
@@ -54,12 +54,12 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
 
     // Generate mailto link
     const recipient = 'cas-test@transa.ch';
-    const subject = encodeURIComponent('Interesse am Essential Explorer Kit');
+    const subject = encodeURIComponent('Abstimmungsergebnisse: Explorer Kit');
     
     const bodyParts = [
       'Hallo Transa Team,',
       '',
-      'hiermit bekunde ich mein Interesse am Essential Explorer Kit mit folgender Zusammenstellung:',
+      'hiermit sende ich meine Abstimmungsergebnisse für das Explorer Kit:',
       '',
       '--- Persönliche Daten ---',
       `Vorname: ${form.firstName}`,
@@ -67,32 +67,47 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
       `E-Mail: ${form.email}`,
       `Newsletter: ${form.newsletter ? 'Ja, ich möchte den Newsletter erhalten' : 'Nein, ich möchte keinen Newsletter'}`,
       '',
-      '--- Ausgewählte Produkte ---',
-      bundle.backpack?.name ? `Rucksack: ${bundle.backpack.name}` : '',
-      bundle.powerbank?.name ? `Powerbank: ${bundle.powerbank.name}` : '',
-      bundle.bottle?.name ? `Trinkflasche: ${bundle.bottle.name}` : '',
+      '--- Abstimmungsergebnisse ---',
       '',
-      'Bitte informieren Sie mich über Verfügbarkeit und Preise.',
+      'RUCKSÄCKE:',
+      ...votes.filter(v => v.category === 'backpack').map(v => `${v.productName}: ${v.vote === 'yes' ? '✓ JA' : '✗ NEIN'}`),
+      '',
+      'POWERBANKS:',
+      ...votes.filter(v => v.category === 'powerbank').map(v => `${v.productName}: ${v.vote === 'yes' ? '✓ JA' : '✗ NEIN'}`),
+      '',
+      'TRINKFLASCHEN:',
+      ...votes.filter(v => v.category === 'bottle').map(v => `${v.productName}: ${v.vote === 'yes' ? '✓ JA' : '✗ NEIN'}`),
+      '',
+      'Vielen Dank für die Berücksichtigung meiner Stimme!',
       '',
       'Freundliche Grüsse'
-    ].filter(line => line !== '');
+    ];
     
     const body = encodeURIComponent(bodyParts.join('\n'));
     const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
     
     window.location.href = mailtoLink;
-    
-    // Navigate to thank you screen
     onThankYou();
   };
 
   const handleInputChange = (field: keyof ContactFormType, value: string | boolean) => {
     setForm(prev => ({ ...prev, [field]: value }));
     
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const groupedVotes = {
+    backpack: votes.filter(v => v.category === 'backpack'),
+    powerbank: votes.filter(v => v.category === 'powerbank'),
+    bottle: votes.filter(v => v.category === 'bottle')
+  };
+
+  const categoryNames = {
+    backpack: 'Rucksäcke',
+    powerbank: 'Powerbanks',
+    bottle: 'Trinkflaschen'
   };
 
   return (
@@ -103,7 +118,6 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
       transition={{ duration: 0.6 }}
     >
       <div className="w-full max-w-2xl">
-        {/* Header */}
         <motion.div 
           className="text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -117,48 +131,41 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
           </div>
           
           <h1 className="text-4xl font-bold text-transa-text mb-4">
-            Deine Auswahl ist 
-            <span className="text-transa-turquoise block">perfekt!</span>
+            Deine Abstimmung ist 
+            <span className="text-transa-turquoise block">komplett!</span>
           </h1>
           <p className="text-lg text-transa-text/70 mb-6">
-            Lass uns deine Kontaktdaten wissen, um dich über das Explorer Kit zu informieren
+            Danke für deine Bewertungen! Lass uns deine Kontaktdaten wissen.
           </p>
         </motion.div>
 
-        {/* Ausgewählte Produkte */}
+        {/* Abstimmungsergebnisse */}
         <motion.div 
           className="bg-white rounded-xl shadow-lg p-6 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <h2 className="text-xl font-bold text-transa-text mb-4">Deine Auswahl:</h2>
-          <div className="grid grid-cols-3 gap-4">
-            {bundle.backpack && (
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
-                  <img src={bundle.backpack.image} alt={bundle.backpack.name} className="w-full h-full object-contain" />
-                </div>
-                <p className="text-sm font-medium text-transa-text">{bundle.backpack.name}</p>
+          <h2 className="text-xl font-bold text-transa-text mb-4">Deine Abstimmungsergebnisse:</h2>
+          
+          {Object.entries(groupedVotes).map(([category, categoryVotes]) => (
+            <div key={category} className="mb-6 last:mb-0">
+              <h3 className="text-lg font-semibold text-transa-text mb-3">
+                {categoryNames[category as keyof typeof categoryNames]}
+              </h3>
+              <div className="space-y-2">
+                {categoryVotes.map((vote) => (
+                  <div key={vote.productId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <span className="text-transa-text font-medium">{vote.productName}</span>
+                    <div className={`flex items-center space-x-1 ${vote.vote === 'yes' ? 'text-green-600' : 'text-red-600'}`}>
+                      {vote.vote === 'yes' ? <Check size={20} /> : <X size={20} />}
+                      <span className="font-semibold">{vote.vote === 'yes' ? 'JA' : 'NEIN'}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            )}
-            {bundle.powerbank && (
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
-                  <img src={bundle.powerbank.image} alt={bundle.powerbank.name} className="w-full h-full object-contain" />
-                </div>
-                <p className="text-sm font-medium text-transa-text">{bundle.powerbank.name}</p>
-              </div>
-            )}
-            {bundle.bottle && (
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
-                  <img src={bundle.bottle.image} alt={bundle.bottle.name} className="w-full h-full object-contain" />
-                </div>
-                <p className="text-sm font-medium text-transa-text">{bundle.bottle.name}</p>
-              </div>
-            )}
-          </div>
+            </div>
+          ))}
         </motion.div>
 
         {/* Kontaktformular */}
@@ -245,7 +252,7 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
                 type="submit"
                 className="w-full py-4 text-lg font-semibold bg-transa-turquoise hover:bg-transa-turquoise/90 text-white rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Absenden
+                Abstimmung absenden
               </Button>
               
               <Button 
@@ -254,7 +261,7 @@ const FinalScreen: React.FC<FinalScreenProps> = ({ bundle, onThankYou, onRestart
                 variant="outline"
                 className="w-full py-3 text-transa-text border-transa-text/30 hover:bg-transa-text/5 rounded-xl transition-all duration-300"
               >
-                Nochmal eine Auswahl treffen
+                Nochmal abstimmen
               </Button>
             </div>
           </form>
