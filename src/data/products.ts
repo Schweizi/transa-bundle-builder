@@ -5,69 +5,69 @@ export const products: Product[] = [
   // 3 Rucksäcke
   {
     id: 'backpack-1',
-    name: 'Explorer Pro 55L',
-    description: 'Für anspruchsvolle Hochtouren mit viel Ausrüstung.',
-    image: '/lovable-uploads/531ee38c-183f-4c63-bb07-cc9cf6413c22.png',
+    name: 'Patagonia Arbor Grande',
+    description: 'Nachhaltiger 32L Rucksack für Alltag und Outdoor.',
+    image: '/lovable-uploads/502d89e3-75b5-4f42-9fe2-0c80a9d3a239.png',
     category: 'backpack'
   },
   {
     id: 'backpack-2',
-    name: 'Trailblazer 35L',
-    description: 'Der perfekte Allrounder für Tages- und Wochenendwanderungen.',
-    image: '/lovable-uploads/7fe0fdf1-aecc-4274-b1f9-7f0fb03fa256.png',
+    name: 'The North Face Berkeley',
+    description: 'Vielseitiger 25L Daypack in auffälligem Design.',
+    image: '/lovable-uploads/a044632d-5e15-4c3c-aacb-331ffef3e5ae.png',
     category: 'backpack'
   },
   {
     id: 'backpack-3',
-    name: 'City Commuter 22L',
-    description: 'Stilvoll und funktional für den urbanen Alltag.',
-    image: '/lovable-uploads/264ce704-118f-40aa-8e34-e02aa4f2c73d.png',
+    name: 'Vaude CityGo 30',
+    description: 'Umweltfreundlicher 30L Rucksack für urbane Abenteuer.',
+    image: '/lovable-uploads/a4040e73-6cdd-4b13-87c9-7f83a3ad2c0d.png',
     category: 'backpack'
   },
   
   // 3 Powerbanks
   {
     id: 'powerbank-1',
-    name: 'Solar Charge 20000mAh',
-    description: 'Mit Solarpanel für Unabhängigkeit auf langen Touren.',
-    image: '/lovable-uploads/327c5f48-1bd6-4dab-8b2f-e1aa180812e2.png',
+    name: 'Nitecore Carbon 6K',
+    description: 'Ultraleichte 6000mAh Powerbank mit Carbon-Design.',
+    image: '/lovable-uploads/8e264756-bb22-4d5f-894c-ed180eceb943.png',
     category: 'powerbank'
   },
   {
     id: 'powerbank-2',
-    name: 'Pocket Rocket 10000mAh',
-    description: 'Kompakt und leicht, passt in jede Hosentasche.',
-    image: '/lovable-uploads/aedeccef-cb1e-48ea-9904-21110ad8671d.png',
+    name: 'Nitecore NB Lite',
+    description: 'Kompakte 15000mAh Powerbank für längere Touren.',
+    image: '/lovable-uploads/ea2e002b-1741-40a2-9747-289c949f1ddd.png',
     category: 'powerbank'
   },
   {
     id: 'powerbank-3',
-    name: 'Endurance Max 25000mAh',
-    description: 'Maximale Kapazität für mehrere Ladezyklen.',
-    image: '/lovable-uploads/e6ca1939-0c51-4f9f-9d56-9a525323ce22.png',
+    name: 'Sunslice Gravity 27',
+    description: 'Große 27000mAh Kapazität für maximale Ausdauer.',
+    image: '/lovable-uploads/0d3032dd-4edd-4199-b21d-8e3d6a1bd3fa.png',
     category: 'powerbank'
   },
   
   // 3 Trinkflaschen
   {
     id: 'bottle-1',
-    name: 'Thermo Steel 1L',
-    description: 'Hält Getränke 12h heiss oder 24h kalt. Robust.',
-    image: '/lovable-uploads/406643ec-d587-459c-a292-496310730a09.png',
+    name: 'Hydro Flask Standard',
+    description: 'Klassische Isolierflasche - hält 12h heiß, 24h kalt.',
+    image: '/lovable-uploads/6de68ac4-6347-4332-9541-acebe4efc49a.png',
     category: 'bottle'
   },
   {
     id: 'bottle-2',
-    name: 'Trail Squeeze 750ml',
-    description: 'Leichte, quetschbare Flasche mit Beissventil.',
-    image: '/lovable-uploads/0ac72ead-b902-49aa-a89e-57fc2d90fdfd.png',
+    name: 'Primus TrailBreak Vacuum',
+    description: 'Leichte Thermosflasche in verschiedenen Farben.',
+    image: '/lovable-uploads/a9e08632-36ba-48f9-b095-a9436e267643.png',
     category: 'bottle'
   },
   {
     id: 'bottle-3',
-    name: 'Crystal Glass 500ml',
-    description: 'Geschmacksneutral und stylisch aus Borosilikatglas.',
-    image: '/lovable-uploads/8d0e5c33-8e50-4fa2-9e3d-e8f24a930b29.png',
+    name: 'SIGG Explorer',
+    description: 'Robuste Einhandflasche mit ergonomischem Design.',
+    image: '/lovable-uploads/ce712e2d-0c06-47c4-a8a0-400aece2741f.png',
     category: 'bottle'
   }
 ];
