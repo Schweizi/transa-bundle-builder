@@ -1,81 +1,44 @@
 
 import React from 'react';
-import { motion, PanInfo, useMotionValue, useTransform } from 'framer-motion';
 import { Product } from '@/types/Product';
+import { motion, PanInfo } from 'framer-motion';
 
 interface ProductCardProps {
   product: Product;
   onSwipe: (direction: 'left' | 'right') => void;
-  isAnimating: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating }) => {
-  const x = useMotionValue(0);
-  const rotate = useTransform(x, [-200, 0, 200], [-20, 0, 20]);
-  const opacity = useTransform(x, [-200, -50, 0, 50, 200], [0.5, 1, 1, 1, 0.5]);
-  
-  // Call all useTransform hooks consistently at the top level
-  const neinOpacity = useTransform(x, [-100, -50], [1, 0]);
-  const neinScale = useTransform(x, [-100, -50], [1, 0.8]);
-  const jaOpacity = useTransform(x, [50, 100], [0, 1]);
-  const jaScale = useTransform(x, [50, 100], [0.8, 1]);
-
-  const handleDragEnd = (event: any, info: PanInfo) => {
-    const threshold = 100;
-    
-    if (Math.abs(info.offset.x) > threshold) {
-      const direction = info.offset.x > 0 ? 'right' : 'left';
-      onSwipe(direction);
+const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe }) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 100;
+    if (info.offset.x > swipeThreshold) {
+      onSwipe('right');
+    } else if (info.offset.x < -swipeThreshold) {
+      onSwipe('left');
     }
   };
 
-  // Don't render anything if animating, but ensure all hooks are called first
-  if (isAnimating) {
-    return null;
-  }
-
   return (
     <motion.div
-      className="relative w-80 h-96 bg-white rounded-2xl shadow-lg cursor-grab select-none"
-      style={{ x, rotate, opacity }}
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
-      whileDrag={{ cursor: 'grabbing', scale: 1.05 }}
-      animate={{ x: 0, rotate: 0 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      className="relative w-80 h-96 bg-white rounded-2xl shadow-lg cursor-grab select-none"
+      whileTap={{ cursor: 'grabbing' }}
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      exit={{ x: (info: any) => (info?.offset?.x > 0 ? 300 : -300), opacity: 0 }}
     >
-      {/* Swipe indicators */}
-      <motion.div 
-        className="absolute top-8 left-8 px-4 py-2 rounded-lg font-bold bg-transa-red text-white z-10"
-        style={{ 
-          opacity: neinOpacity,
-          scale: neinScale
-        }}
-      >
-        NEIN
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-8 right-8 px-4 py-2 rounded-lg font-bold bg-transa-turquoise text-white z-10"
-        style={{ 
-          opacity: jaOpacity,
-          scale: jaScale
-        }}
-      >
-        JA
-      </motion.div>
-      
-      {/* Product Image */}
-      <div className="w-full h-64 rounded-t-2xl overflow-hidden">
-        <img 
-          src={product.image} 
+      <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4">
+        <img
+          src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain drag-none"
+          draggable={false}
         />
       </div>
-      
-      {/* Product Info */}
+
       <div className="p-6">
         <h3 className="text-xl font-bold text-transa-text mb-2">{product.name}</h3>
         <p className="text-transa-text/70 text-sm leading-relaxed">{product.description}</p>
