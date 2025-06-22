@@ -40,7 +40,7 @@ export const products: Product[] = [
     image: '/lovable-uploads/a4040e73-6cdd-4b13-87c9-7f83a3ad2c0d.png',
     category: 'powerbank'
   },
-   {
+  {
     id: 'powerbank-3',
     name: 'Anker PowerCore 10000',
     description: 'Ein bewährter Klassiker, klein aber leistungsstark.',

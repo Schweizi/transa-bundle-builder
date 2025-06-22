@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { Product, SelectedBundle } from '@/types/Product';
 import StartScreen from '@/components/StartScreen';
 import SwipeScreen from '@/components/SwipeScreen';
-import ResultScreen from '@/components/ResultScreen';
-import ContactForm from '@/components/ContactForm';
+import FinalScreen from '@/components/FinalScreen';
+import ThankYouScreen from '@/components/ThankYouScreen';
 
-type AppState = 'start' | 'backpack' | 'powerbank' | 'bottle' | 'result' | 'contact';
+type AppState = 'start' | 'backpack' | 'powerbank' | 'bottle' | 'final' | 'thankyou';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('start');
@@ -34,22 +34,18 @@ const Index = () => {
       case 'bottle':
         newBundle.bottle = product;
         setSelectedBundle(newBundle);
-        setCurrentState('result');
+        setCurrentState('final');
         break;
     }
   };
 
-  const handleShowInterest = () => {
-    setCurrentState('contact');
+  const handleThankYou = () => {
+    setCurrentState('thankyou');
   };
 
   const handleRestart = () => {
     setCurrentState('start');
     setSelectedBundle({});
-  };
-
-  const handleBackToResult = () => {
-    setCurrentState('result');
   };
 
   const getStepNumber = (state: AppState): number => {
@@ -78,18 +74,17 @@ const Index = () => {
         />
       )}
       
-      {currentState === 'result' && (
-        <ResultScreen 
+      {currentState === 'final' && (
+        <FinalScreen 
           bundle={selectedBundle}
-          onShowInterest={handleShowInterest}
+          onThankYou={handleThankYou}
           onRestart={handleRestart}
         />
       )}
       
-      {currentState === 'contact' && (
-        <ContactForm 
-          bundle={selectedBundle}
-          onBack={handleBackToResult}
+      {currentState === 'thankyou' && (
+        <ThankYouScreen 
+          onRestart={handleRestart}
         />
       )}
     </div>
