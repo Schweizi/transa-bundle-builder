@@ -42,6 +42,42 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ bundle, onShowInterest, onR
           </p>
         </motion.div>
 
+        {/* Ausgewählte Produkte anzeigen */}
+        <motion.div 
+          className="bg-white rounded-xl shadow-lg p-6 mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          <h2 className="text-xl font-bold text-transa-text mb-4">Deine Auswahl:</h2>
+          <div className="grid grid-cols-3 gap-4">
+            {bundle.backpack && (
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
+                  <img src={bundle.backpack.image} alt={bundle.backpack.name} className="w-full h-full object-contain" />
+                </div>
+                <p className="text-sm font-medium text-transa-text">{bundle.backpack.name}</p>
+              </div>
+            )}
+            {bundle.powerbank && (
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
+                  <img src={bundle.powerbank.image} alt={bundle.powerbank.name} className="w-full h-full object-contain" />
+                </div>
+                <p className="text-sm font-medium text-transa-text">{bundle.powerbank.name}</p>
+              </div>
+            )}
+            {bundle.bottle && (
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-2 p-4 bg-gray-50 rounded-lg">
+                  <img src={bundle.bottle.image} alt={bundle.bottle.name} className="w-full h-full object-contain" />
+                </div>
+                <p className="text-sm font-medium text-transa-text">{bundle.bottle.name}</p>
+              </div>
+            )}
+          </div>
+        </motion.div>
+
         {/* Community Info */}
         <motion.div 
           className="bg-white rounded-xl shadow-lg p-8 mb-8"

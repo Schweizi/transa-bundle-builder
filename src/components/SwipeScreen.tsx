@@ -32,6 +32,7 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
     if (direction === 'right') {
       onProductSelected(products[currentIndex]);
     } else {
+      // Direkt und synchron zum nächsten Produkt wechseln
       if (currentIndex < products.length - 1) {
         setCurrentIndex(currentIndex + 1);
       } else {
