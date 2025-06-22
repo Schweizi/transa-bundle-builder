@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Transa Brand Colors
+				'transa-bg': '#f6e5dd',
+				'transa-text': '#1a1a1a', 
+				'transa-turquoise': '#00a4b7',
+				'transa-red': '#d21617',
+				'transa-yellow': '#ffd600'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +91,29 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'swipe-right': {
+					'0%': { transform: 'translateX(0) rotate(0deg)', opacity: '1' },
+					'100%': { transform: 'translateX(100%) rotate(15deg)', opacity: '0' }
+				},
+				'swipe-left': {
+					'0%': { transform: 'translateX(0) rotate(0deg)', opacity: '1' },
+					'100%': { transform: 'translateX(-100%) rotate(-15deg)', opacity: '0' }
+				},
+				'card-enter': {
+					'0%': { transform: 'scale(0.8) translateY(20px)', opacity: '0' },
+					'100%': { transform: 'scale(1) translateY(0)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'swipe-right': 'swipe-right 0.3s ease-out forwards',
+				'swipe-left': 'swipe-left 0.3s ease-out forwards',
+				'card-enter': 'card-enter 0.4s ease-out'
+			},
+			fontFamily: {
+				'inter': ['Inter', 'sans-serif']
 			}
 		}
 	},
