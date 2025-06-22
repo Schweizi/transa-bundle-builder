@@ -23,6 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
     }
   };
 
+  // Don't render anything if animating, but ensure all hooks are called first
   if (isAnimating) {
     return null;
   }
