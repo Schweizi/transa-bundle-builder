@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types/Product';
 import { getProductsByCategory } from '@/data/products';
 import ProductCard from './ProductCard';
@@ -23,6 +24,7 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
   const [products] = useState<Product[]>(getProductsByCategory(category));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const currentProduct = products[currentIndex];
 
@@ -32,12 +34,13 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
     setIsAnimating(true);
     
     if (direction === 'right') {
-      // Product selected
+      // Product selected - store it and proceed to next category
+      setSelectedProduct(currentProduct);
       setTimeout(() => {
         onProductSelected(currentProduct);
-      }, 300);
+      }, 600);
     } else {
-      // Product rejected, show next
+      // Product rejected - show next product in same category
       setTimeout(() => {
         if (currentIndex < products.length - 1) {
           setCurrentIndex(currentIndex + 1);
@@ -56,6 +59,7 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
   useEffect(() => {
     setCurrentIndex(0);
     setIsAnimating(false);
+    setSelectedProduct(null);
   }, [category]);
 
   if (!currentProduct) {
@@ -76,12 +80,29 @@ const SwipeScreen: React.FC<SwipeScreenProps> = ({ category, step, onProductSele
           </p>
         </div>
         
-        <div className="flex justify-center mb-8">
-          <ProductCard 
-            product={currentProduct}
-            onSwipe={handleSwipe}
-            isAnimating={isAnimating}
-          />
+        <div className="flex justify-center mb-8 h-96">
+          <AnimatePresence mode="wait">
+            {!selectedProduct && (
+              <motion.div
+                key={currentProduct.id}
+                initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ 
+                  x: isAnimating ? (Math.random() > 0.5 ? 300 : -300) : 0,
+                  rotate: isAnimating ? (Math.random() > 0.5 ? 15 : -15) : 0,
+                  opacity: 0,
+                  transition: { duration: 0.3 }
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              >
+                <ProductCard 
+                  product={currentProduct}
+                  onSwipe={handleSwipe}
+                  isAnimating={isAnimating}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         
         <div className="flex justify-center space-x-6">
