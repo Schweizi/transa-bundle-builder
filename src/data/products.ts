@@ -5,42 +5,42 @@ export const products: Product[] = [
   // 3 Rucksäcke
   {
     id: 'backpack-1',
-    name: 'Vaude CityGo 23 II',
-    description: 'Moderner Stadtrucksack mit vielseitigen Features.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Rucksack%20Vaude%20CityGo%2023%20II.jpg',
+    name: 'Patagonia Arbor Grande',
+    description: 'Nachhaltiger 32L Rucksack für Alltag und Outdoor.',
+    image: '/lovable-uploads/80791397-b3f6-4bf8-afab-b4da50322988.png',
     category: 'backpack'
   },
   {
     id: 'backpack-2',
-    name: 'RAB Aeon 25',
-    description: 'Leichter und flexibler Rucksack für schnelle Touren.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Rucksack%20RAB%20Aeon%2025.jpg',
+    name: 'Patagonia Arbor Classic',
+    description: 'Vielseitiger 25L Daypack in auffälligem Design.',
+    image: '/lovable-uploads/40b0ec52-3cc2-4b41-be48-fb3aa3c7e56d.png',
     category: 'backpack'
   },
   {
     id: 'backpack-3',
-    name: 'The North Face Base Camp',
-    description: 'Extrem robuster und wasserabweisender Tagesrucksack.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Rucksack%20The%20North%20Face%20Base%20Camp%20Daypack.jpg',
+    name: 'RAB Aeon 25',
+    description: 'Leichter und flexibler Rucksack für schnelle Touren.',
+    image: '/lovable-uploads/c0af86cd-cc86-405f-8013-515448b00c54.png',
     category: 'backpack'
   },
   
   // 3 Powerbanks
   {
     id: 'powerbank-1',
-    name: 'Nitecore NB Air 5000mAh',
-    description: 'Extrem leichte Carbon-Powerbank für unterwegs.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Nitecore%20Powerbank%20NB%20Air%205000mAh.jpg',
+    name: 'Nitecore Carbon Battery 6K',
+    description: 'Ultraleichte 6000mAh Powerbank mit Carbon-Design.',
+    image: '/lovable-uploads/8ef13881-37e3-4d13-acc3-3861ed7ebf6f.png',
     category: 'powerbank'
   },
   {
     id: 'powerbank-2',
-    name: 'Nitecore Carbon Battery 6K',
-    description: 'Kompakte 6000mAh Energie für deine Geräte.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Nitecore%20Powerbank%20Carbon%20Battery.jpg',
+    name: 'Nitecore NB Air 5000mAh',
+    description: 'Extrem leichte Carbon-Powerbank für unterwegs.',
+    image: '/lovable-uploads/5b83f425-843c-4bdb-b37b-8520a1ba0a05.png',
     category: 'powerbank'
   },
-   {
+  {
     id: 'powerbank-3',
     name: 'Anker PowerCore 10000',
     description: 'Ein bewährter Klassiker, klein aber leistungsstark.',
@@ -53,21 +53,21 @@ export const products: Product[] = [
     id: 'bottle-1',
     name: 'Sigg Shield Therm ONE',
     description: 'Hochwertige Thermosflasche, hält 24h kalt.',
-    image: 'https://storage.googleapis.com/lovable-public-assets/project-data/df1b5588-8322-4cb6-986b-797ba92de181/Flasche%20Sigg%20Shield%20Therm%20ONE.jpg',
+    image: '/lovable-uploads/3c62dbf6-fb67-466c-b98b-be2cc18189b0.png',
     category: 'bottle'
   },
   {
     id: 'bottle-2',
-    name: 'Nalgene Weithals 1L',
-    description: 'Der unzerstörbare Klassiker für jedes Abenteuer.',
-    image: 'https://images.unsplash.com/photo-1571770095004-6b61b1cf308a?w=500&h=600&fit=crop',
+    name: 'Primus TrailBreak Vacuum',
+    description: 'Leichte Thermosflasche in verschiedenen Farben.',
+    image: '/lovable-uploads/1d4986b6-ea44-4db2-9efd-9fea7ab2b59d.png',
     category: 'bottle'
   },
   {
     id: 'bottle-3',
     name: 'Hydro Flask Standard Mouth',
     description: 'Stylische Isolierflasche mit perfekter Haptik.',
-    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&h=600&fit=crop',
+    image: '/lovable-uploads/582e2527-c25e-4e98-b38f-c2b3ed234481.png',
     category: 'bottle'
   }
 ];
