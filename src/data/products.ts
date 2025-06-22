@@ -2,72 +2,114 @@
 import { Product } from '@/types/Product';
 
 export const products: Product[] = [
-  // Backpacks
+  // 5 Rucksäcke
   {
     id: 'backpack-1',
-    name: 'Explorer Pro 45L',
-    description: 'Robuster Trekkingrucksack für mehrtägige Touren',
+    name: 'Alpinist Pro 55L',
+    description: 'Für anspruchsvolle Hochtouren mit viel Ausrüstung.',
     image: 'https://images.unsplash.com/photo-1577982886439-54b294318d17?w=500&h=600&fit=crop',
     category: 'backpack'
   },
   {
     id: 'backpack-2',
-    name: 'Urban Adventure 30L',
-    description: 'Vielseitiger Rucksack für Stadt und Natur',
-    image: 'https://images.unsplash.com/photo-1621961238992-992815a519a7?w=500&h=600&fit=crop',
+    name: 'Trailblazer 35L',
+    description: 'Der perfekte Allrounder für Tages- und Wochenendwanderungen.',
+    image: 'https://images.unsplash.com/photo-1588721936551-3b5a1425e2ce?w=500&h=600&fit=crop',
     category: 'backpack'
   },
   {
     id: 'backpack-3',
-    name: 'Summit Peak 60L',
-    description: 'Großvolumiger Rucksack für Expeditionen',
-    image: 'https://images.unsplash.com/photo-1588721936?w=500&h=600&fit=crop',
+    name: 'City Commuter 22L',
+    description: 'Stilvoll und funktional für den urbanen Alltag.',
+    image: 'https://images.unsplash.com/photo-1621961238992-992815a519a7?w=500&h=600&fit=crop',
+    category: 'backpack'
+  },
+  {
+    id: 'backpack-4',
+    name: 'SpeedLite 18L',
+    description: 'Ultraleicht für Trailrunning und schnelle Aufstiege.',
+    image: 'https://images.unsplash.com/photo-1590553229873-a804791e2474?w=500&h=600&fit=crop',
+    category: 'backpack'
+  },
+  {
+    id: 'backpack-5',
+    name: 'Voyager 70L',
+    description: 'Für lange Reisen und Backpacker-Abenteuer weltweit.',
+    image: 'https://images.unsplash.com/photo-1557622289-b323585c4942?w=500&h=600&fit=crop',
     category: 'backpack'
   },
   
-  // Powerbanks
+  // 5 Powerbanks
   {
     id: 'powerbank-1',
-    name: 'Solar Power 20000mAh',
-    description: 'Solarbetriebene Powerbank für lange Touren',
-    image: 'https://images.unsplash.com/photo-1616448378583-04b383733221?w=500&h=600&fit=crop',
+    name: 'Solar Charge 20000mAh',
+    description: 'Mit Solarpanel für Unabhängigkeit auf langen Touren.',
+    image: 'https://images.unsplash.com/photo-1583573636332-35633b5c6d3d?w=500&h=600&fit=crop',
     category: 'powerbank'
   },
   {
     id: 'powerbank-2',
-    name: 'Compact Charge 10000mAh',
-    description: 'Leichte und kompakte Energiereserve',
-    image: 'https://images.unsplash.com/photo-1609592043331-8e6c96bdbc72?w=500&h=600&fit=crop',
+    name: 'Pocket Rocket 10000mAh',
+    description: 'Kompakt und leicht, passt in jede Hosentasche.',
+    image: 'https://images.unsplash.com/photo-1616091216799-41377531631b?w=500&h=600&fit=crop',
     category: 'powerbank'
   },
   {
     id: 'powerbank-3',
-    name: 'Rugged Power 25000mAh',
-    description: 'Wasserdichte Powerbank für extreme Bedingungen',
+    name: 'Endurance Max 25000mAh',
+    description: 'Maximale Kapazität für mehrere Ladezyklen.',
+    image: 'https://images.unsplash.com/photo-1609592043331-8e6c96bdbc72?w=500&h=600&fit=crop',
+    category: 'powerbank'
+  },
+  {
+    id: 'powerbank-4',
+    name: 'Rugged Armor 15000mAh',
+    description: 'Stossfest und wasserdicht für extreme Bedingungen.',
     image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=500&h=600&fit=crop',
     category: 'powerbank'
   },
+  {
+    id: 'powerbank-5',
+    name: 'Wireless Power 10000mAh',
+    description: 'Kabelloses Laden für kompatible Smartphones.',
+    image: 'https://images.unsplash.com/photo-1631553149697-7e26b01b6352?w=500&h=600&fit=crop',
+    category: 'powerbank'
+  },
   
-  // Bottles
+  // 5 Trinkflaschen
   {
     id: 'bottle-1',
-    name: 'Thermo Steel 750ml',
-    description: 'Isolierte Edelstahlflasche für optimale Temperatur',
+    name: 'Thermo Steel 1L',
+    description: 'Hält Getränke 12h heiss oder 24h kalt. Robust.',
     image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&h=600&fit=crop',
     category: 'bottle'
   },
   {
     id: 'bottle-2',
-    name: 'Ultra Light 500ml',
-    description: 'Ultraleichte Flasche für Gewichtsbewusste',
-    image: 'https://images.unsplash.com/photo-1544940244-6545dbd71280?w=500&h=600&fit=crop',
+    name: 'Trail Squeeze 750ml',
+    description: 'Leichte, quetschbare Flasche mit Beissventil.',
+    image: 'https://images.unsplash.com/photo-1613243301389-43c2a42d9921?w=500&h=600&fit=crop',
     category: 'bottle'
   },
   {
     id: 'bottle-3',
-    name: 'Adventure Hydro 1L',
-    description: 'Große Trinkflasche für den ganzen Tag',
-    image: 'https://images.unsplash.com/photo-1571770095004-6b61b1cf308a?w=500&h=600&fit=crop',
+    name: 'Crystal Glass 500ml',
+    description: 'Geschmacksneutral und stylisch aus Borosilikatglas.',
+    image: 'https://images.unsplash.com/photo-1627933132335-e6245c7a452a?w=500&h=600&fit=crop',
+    category: 'bottle'
+  },
+  {
+    id: 'bottle-4',
+    name: 'FilterFlow Active 800ml',
+    description: 'Integrierter Wasserfilter für sauberes Wasser unterwegs.',
+    image: 'https://images.unsplash.com/photo-1551767988-31a618a8e3d6?w=500&h=600&fit=crop',
+    category: 'bottle'
+  },
+  {
+    id: 'bottle-5',
+    name: 'Minimalist Tritan 1.2L',
+    description: 'Grosse, leichte und bruchsichere Kunststoffflasche.',
+    image: 'https://images.unsplash.com/photo-1610342334947-36258c73c333?w=500&h=600&fit=crop',
     category: 'bottle'
   }
 ];

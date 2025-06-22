@@ -57,11 +57,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ bundle, onShowInterest, onR
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="aspect-square overflow-hidden p-4">
                   <img 
                     src={product.image} 
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>

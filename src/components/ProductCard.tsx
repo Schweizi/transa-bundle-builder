@@ -67,11 +67,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSwipe, isAnimating
       </motion.div>
       
       {/* Product Image */}
-      <div className="w-full h-64 rounded-t-2xl overflow-hidden">
+      <div className="w-full h-64 rounded-t-2xl overflow-hidden p-4">
         <img 
           src={product.image} 
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           draggable={false}
         />
       </div>
